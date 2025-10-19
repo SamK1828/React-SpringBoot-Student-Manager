@@ -137,6 +137,7 @@ axios.get(import.meta.env.VITE_API_BASE_URL);
 * Implement CRUD operations using **Spring Data JPA**
 
 ---
+<!--
 ## 📸 Screenshots
 
 ### 🏠 Home Page
@@ -148,7 +149,7 @@ axios.get(import.meta.env.VITE_API_BASE_URL);
 ![Students Page](https://via.placeholder.com/800x400?text=Students+Dashboard)
 
 ---
-
+-->
 ## 🧑‍💻 Author
 
 **👤 Samarth Kalegaonkar**
