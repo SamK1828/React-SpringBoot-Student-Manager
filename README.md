@@ -155,9 +155,9 @@ axios.get(import.meta.env.VITE_API_BASE_URL);
 **👤 Samarth Kalegaonkar**
 
 * 💼 Java Full Stack Developer
-* 🔗 [GitHub](https://github.com/SamKalegaonkar)
-* 🌐 [Portfolio](#)
-* 📧 [samarth.kalegaonkar@example.com](mailto:samarth.kalegaonkar@example.com)
+* 🔗 [GitHub](https://github.com/SamK1828)
+<!--* 🌐 [Portfolio](#)-->
+* 📧 [kalegaonkarsamarth@gmail.com](mailto:kalegaonkarsamarth@gmail.com)
 
 ---
 
