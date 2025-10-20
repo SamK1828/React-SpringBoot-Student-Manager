@@ -45,7 +45,7 @@ return (
                 </div>
 
                 <Link
-                    to="/students/new"
+                    to="/add-student"
                     className="bg-white text-indigo-700 px-3 py-2 rounded-md font-medium hover:shadow-md transition"
                 >
                     + Add Student
