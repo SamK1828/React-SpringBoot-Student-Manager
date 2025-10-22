@@ -39,9 +39,9 @@ return (
                         className="w-full max-w-xs md:w-56 bg-white/10 placeholder-white/70 text-white text-sm rounded-md py-2 pl-10 pr-3 focus:outline-none focus:ring-2 focus:ring-white/30 transition"
                         aria-label="Search students"
                     />
-                    <svg className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    {/* <svg className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1016.65 16.65z" />
-                    </svg>
+                    </svg> */}
                 </div>
 
                 <Link
@@ -83,7 +83,7 @@ return (
                         <Link to="/" className="block px-3 py-2 rounded-md hover:bg-white/10">Home</Link>
                         <Link to="/students" className="block px-3 py-2 rounded-md hover:bg-white/10">Students</Link>
                         <Link to="/about" className="block px-3 py-2 rounded-md hover:bg-white/10">About</Link>
-                        <Link to="/students/new" className="block mt-1 bg-white text-indigo-700 px-3 py-2 rounded-md text-center">+ Add Student</Link>
+                        <Link to="/add-student" className="block mt-1 bg-white text-indigo-700 px-3 py-2 rounded-md text-center">+ Add Student</Link>
                     </div>
                 </details>
             </div>
