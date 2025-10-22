@@ -24,7 +24,7 @@ const EditStudent = () => {
         console.error("❌ Error fetching student:", error);
       }
     };
-    
+
     fetchStudent();
   }, [id]);
 
