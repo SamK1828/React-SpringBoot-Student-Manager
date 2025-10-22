@@ -1,6 +1,7 @@
 // src/pages/EditStudent.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 const EditStudent = () => {
   const navigate = useNavigate();
@@ -13,28 +14,36 @@ const EditStudent = () => {
     marks: "",
   });
 
-  // Fetch existing student data (later from backend)
+  // 🔹 Fetch student data when component loads
   useEffect(() => {
-    // Example placeholder for backend fetch
-    // axios.get(`http://localhost:8080/api/students/${id}`).then(res => setStudent(res.data));
-    setStudent({
-      name: "",
-      email: "",
-      course: "",
-      marks: "",
-    });
+    fetchStudent();
   }, [id]);
 
+  const fetchStudent = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/students/${id}`);
+      setStudent(response.data);
+    } catch (error) {
+      console.error("❌ Error fetching student:", error);
+    }
+  };
+
+  // 🔹 Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setStudent({ ...student, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  // 🔹 Update student in backend
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Updated Student:", student);
-    // later -> axios.put(`http://localhost:8080/api/students/${id}`, student);
-    navigate("/students");
+    try {
+      await axios.put(`http://localhost:8080/api/students/${id}`, student);
+      alert("✅ Student updated successfully!");
+      navigate("/students");
+    } catch (error) {
+      console.error("❌ Error updating student:", error);
+    }
   };
 
   return (
