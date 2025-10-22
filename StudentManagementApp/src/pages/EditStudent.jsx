@@ -16,17 +16,17 @@ const EditStudent = () => {
 
   // 🔹 Fetch student data when component loads
   useEffect(() => {
+    const fetchStudent = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/students/${id}`);
+        setStudent(response.data);
+      } catch (error) {
+        console.error("❌ Error fetching student:", error);
+      }
+    };
+    
     fetchStudent();
   }, [id]);
-
-  const fetchStudent = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8080/api/students/${id}`);
-      setStudent(response.data);
-    } catch (error) {
-      console.error("❌ Error fetching student:", error);
-    }
-  };
 
   // 🔹 Handle input change
   const handleChange = (e) => {
