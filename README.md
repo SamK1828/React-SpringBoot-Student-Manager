@@ -36,42 +36,69 @@ This project allows you to **add, view, update, and delete students**, manage re
 
 ### Frontend (`/frontend`)
 ```
-
-src/
-│
-├── components/
-│   ├── Navbar.jsx
-│   ├── Home.jsx
-│   ├── Students.jsx
-│   ├── AddStudent.jsx
-│   ├── About.jsx
-│
-├── App.jsx
-├── main.jsx
-└── index.css
-
+├── StudentManagementApp
+    ├── .env
+    ├── .gitignore
+    ├── eslint.config.js
+    ├── index.html
+    ├── package-lock.json
+    ├── package.json
+    ├── public
+    │   └── vite.svg
+    ├── src
+    │   ├── App.css
+    │   ├── App.jsx
+    │   ├── assets
+    │   │   └── react.svg
+    │   ├── components
+    │   │   ├── Footer.jsx
+    │   │   ├── Navbar.jsx
+    │   │   ├── StudentForm.jsx
+    │   │   └── StudentTable.jsx
+    │   ├── index.css
+    │   ├── main.jsx
+    │   ├── pages
+    │   │   ├── About.jsx
+    │   │   ├── AddStudent.jsx
+    │   │   ├── EditStudent.jsx
+    │   │   ├── Home.jsx
+    │   │   └── Students.jsx
+    │   ├── practice
+    │   │   └── Navbar.jsx
+    │   └── services
+    │   │   └── studentService.js
+    └── vite.config.js
 ```
-
 ### Backend (`/backend`)
 ```
-
-src/main/java/com/studentmanager/
-│
-├── controller/
-│   └── StudentController.java
-│
-├── service/
-│   ├── StudentService.java
-│   └── StudentServiceImpl.java
-│
-├── dao/
-│   └── StudentRepository.java
-│
-└── model/
-└── Student.java
-
+└── student-management-backend
+    ├── .gitattributes
+    ├── .gitignore
+    ├── .mvn
+        └── wrapper
+        │   └── maven-wrapper.properties
+    ├── mvnw
+    ├── mvnw.cmd
+    ├── pom.xml
+    └── src
+        ├── main
+            ├── java
+            │   └── com
+            │   │   └── studentmanager
+            │   │       └── student_management_backend
+            │   │           ├── StudentManagementBackendApplication.java
+            │   │           ├── controller
+            │   │               └── StudentController.java
+            │   │           ├── entity
+            │   │               └── Student.java
+            │   │           ├── repository
+            │   │               └── StudentRepository.java
+            │   │           └── service
+            │   │               ├── StudentService.java
+            │   │               └── StudentServiceImpl.java
+            └── resources
+            │   └── application.properties
 ````
-
 ---
 
 ## ⚙️ Setup and Installation
