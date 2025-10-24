@@ -1,20 +1,27 @@
 // src/pages/Students.jsx
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Students = () => {
   const [students, setStudents] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const searchName = queryParams.get("name");
 
   // 🔹 Fetch students from backend
   useEffect(() => {
     fetchStudents();
-  }, []);
+  });
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/students");
+      const url = searchName
+        ? `http://localhost:8080/api/students/search?name=${searchName}`
+        : "http://localhost:8080/api/students";
+      const response = await axios.get(url);
       setStudents(response.data);
     } catch (error) {
       console.error("❌ Error fetching students:", error);
