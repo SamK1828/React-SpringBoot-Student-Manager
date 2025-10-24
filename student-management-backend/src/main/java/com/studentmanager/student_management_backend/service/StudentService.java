@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.studentmanager.student_management_backend.entity.Student;
 import com.studentmanager.student_management_backend.repository.StudentRepository;
 
-
 @Service
 public class StudentService {
   private final StudentRepository repo;
@@ -41,5 +40,9 @@ public class StudentService {
 
   public void delete(Long id) {
     repo.deleteById(id);
+  }
+
+  public List<Student> searchByName(String name) {
+    return repo.findByNameContainingIgnoreCase(name);
   }
 }
