@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-
+import { toast } from "react-toastify";
 const EditStudent = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -22,6 +22,7 @@ const EditStudent = () => {
         setStudent(response.data);
       } catch (error) {
         console.error("❌ Error fetching student:", error);
+        toast.error("❌ Failed to fetch student data." + error.message);
       }
     };
 
@@ -39,9 +40,11 @@ const EditStudent = () => {
     e.preventDefault();
     try {
       await axios.put(`http://localhost:8080/api/students/${id}`, student);
-      alert("✅ Student updated successfully!");
+      // alert("✅ Student updated successfully!");
+      toast.success(" Student updated successfully!");
       navigate("/students");
     } catch (error) {
+      toast.error(" Failed to update student!");
       console.error("❌ Error updating student:", error);
     }
   };
