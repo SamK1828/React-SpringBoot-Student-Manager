@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const AddStudent = () => {
   const navigate = useNavigate();
@@ -24,11 +25,13 @@ const AddStudent = () => {
     try {
       // 🔗 POST to backend
       await axios.post("http://localhost:8080/api/students", student);
-      alert("✅ Student added successfully!");
+      // alert("✅ Student added successfully!");
+      toast.success("Student added successfully!");
       navigate("/students");
     } catch (error) {
       console.error("❌ Error adding student:", error);
-      alert("Failed to add student. Please check backend connection.");
+      toast.error("Failed to add student. Please check backend connection." + error.message);
+      // alert("Failed to add student. Please check backend connection.");
     }
   };
 
