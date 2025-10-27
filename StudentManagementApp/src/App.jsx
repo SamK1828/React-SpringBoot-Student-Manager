@@ -7,6 +7,7 @@ import AddStudent from "./pages/AddStudent";
 import EditStudent from "./pages/EditStudent";
 import About from "./pages/About";
 import Footer from "./components/Footer";
+import { ToastContainer } from "react-toastify";
 const App = () => {
   return (
     <Router>
@@ -27,6 +28,7 @@ const App = () => {
           </Routes>
           
         </div>
+        <ToastContainer position="top-center" autoClose={3000} />
         <Footer/>
       </div>
       
