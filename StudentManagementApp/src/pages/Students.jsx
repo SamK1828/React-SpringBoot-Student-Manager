@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Students = () => {
   const [students, setStudents] = useState([]);
@@ -24,7 +25,7 @@ const Students = () => {
       const response = await axios.get(url);
       setStudents(response.data);
     } catch (error) {
-      console.error("❌ Error fetching students:", error);
+      console.error(" Error fetching students:", error);
     }
   };
 
@@ -33,8 +34,10 @@ const Students = () => {
     try {
       await axios.delete(`http://localhost:8080/api/students/${id}`);
       setStudents(students.filter((student) => student.id !== id));
+      toast.success("🗑️ Student deleted successfully!");
     } catch (error) {
-      console.error("❌ Error deleting student:", error);
+      toast.error(" Failed to delete student." + error.message);
+      console.error(" Error deleting student:", error);
     }
   };
 
