@@ -4,7 +4,7 @@ const StudentTable = ({ students }) => {
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 border border-indigo-100">
-      <h3 className="text-xl font-semibold text-indigo-700 mb-4">📋 Student Records</h3>
+      {/* <h3 className="text-xl font-semibold text-indigo-700 mb-4">📋 Student Records</h3> */}
 
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
