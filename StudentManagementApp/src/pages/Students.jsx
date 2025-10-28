@@ -11,6 +11,8 @@ const Students = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const searchName = queryParams.get("name");
+    const [file, setFile] = useState(null);
+  // const [searchTerm, setSearchTerm] = useState("");
 
   // 🔹 Fetch students from backend
   useEffect(() => {
@@ -45,7 +47,54 @@ const Students = () => {
   const handleEdit = (id) => {
     navigate(`/edit-student/${id}`);
   };
+  // Import Excel file
+  const handleImport = async () => {
+    if (!file) {
+      alert("Please choose an Excel file first!");
+      return;
+    }
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      await axios.post("http://localhost:8080/api/files/import", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      alert("✅ Students imported successfully!");
+      setFile(null);
+      fetchStudents();
+    } catch (error) {
+      console.error("Error importing file:", error);
+      alert("❌ Failed to import students. Please check file format.");
+    }
+  };
 
+  // Export Excel file
+  const handleExport = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/files/export", {
+        responseType: "blob", // important for file download
+      });
+
+      // Create a temporary link element to trigger download
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "students.xls");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      alert("✅ Students exported successfully!");
+    } catch (error) {
+      console.error("Error exporting file:", error);
+      alert("❌ Failed to export students.");
+    }
+  };
+
+    // Filter logic
+  // const filteredStudents = students.filter((s) =>
+  //   s.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
   // 🔹 Count logic
   const highAchievers = students.filter((s) => s.marks > 80).length;
   const lowPerformers = students.filter((s) => s.marks < 40).length;
@@ -68,6 +117,28 @@ const Students = () => {
             </div>
           </div>
         </div>
+
+        {/* Import/Export Section */}
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        <input
+          type="file"
+          accept=".xls"
+          onChange={(e) => setFile(e.target.files[0])}
+          className="border border-gray-300 rounded-md px-3 py-2"
+        />
+        <button
+          onClick={handleImport}
+          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-all"
+        >
+          Import Excel
+        </button>
+        <button
+          onClick={handleExport}
+          className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-all"
+        >
+          Export Excel
+        </button>
+      </div>
 
         {/* Student Table */}
         <div className="overflow-x-auto bg-white rounded-2xl shadow-lg">
