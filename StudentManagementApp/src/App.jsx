@@ -8,6 +8,7 @@ import EditStudent from "./pages/EditStudent";
 import About from "./pages/About";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
+import ImportExport from "./pages/ImportExport";
 const App = () => {
   return (
     <Router>
@@ -24,7 +25,7 @@ const App = () => {
             <Route path="/add-student" element={<AddStudent />} />
             <Route path="/edit-student/:id" element={<EditStudent />} />
             <Route path="*" element={<h2 className="text-center text-2xl mt-10">404 - Page Not Found</h2>} />
-            
+            <Route path="/import-export" element={<ImportExport />} />
           </Routes>
           
         </div>
