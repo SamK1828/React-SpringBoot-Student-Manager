@@ -17,11 +17,11 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public User registerUser(String email, String password) {
+    public User registerUser(String email, String password ,String role) {
         if (userRepository.findByEmail(email).isPresent()) {
             throw new RuntimeException("Email already registered!");
         }
-        User user = new User(email, passwordEncoder.encode(password));
+        User user = new User(email, passwordEncoder.encode(password),role );
         return userRepository.save(user);
     }
 }
