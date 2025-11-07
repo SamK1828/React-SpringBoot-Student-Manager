@@ -82,7 +82,8 @@ public class User {
     private String password;
     private String role; // e.g. "ROLE_USER" or "ROLE_ADMIN"
 
-    public User() {}
+    public User() {
+    }
 
     public User(String email, String password, String role) {
         this.email = email;
@@ -90,13 +91,35 @@ public class User {
         this.role = role;
     }
 
-    public Long getId() { return id; }
-    public String getEmail() { return email; }
-    public String getPassword() { return password; }
-    public String getRole() { return role; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
-    public void setEmail(String email) { this.email = email; }
-    public void setPassword(String password) { this.password = password; }
-    public void setRole(String role) { this.role = role; }
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
