@@ -80,12 +80,13 @@ public class User {
 
     private String email;
     private String password;
-    private String role; // e.g. "ROLE_USER" or "ROLE_ADMIN"
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public User() {
     }
 
-    public User(String email, String password, String role) {
+    public User(String email, String password, Role role) {
         this.email = email;
         this.password = password;
         this.role = role;
@@ -103,10 +104,6 @@ public class User {
         return password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -119,7 +116,11 @@ public class User {
         this.password = password;
     }
 
-    public void setRole(String role) {
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
         this.role = role;
     }
 }
