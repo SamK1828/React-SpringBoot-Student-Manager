@@ -2,6 +2,7 @@ package com.studentmanager.student_management_backend.service;
 
 
 
+import com.studentmanager.student_management_backend.entity.Role;
 import com.studentmanager.student_management_backend.entity.User;
 import com.studentmanager.student_management_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public User registerUser(String email, String password ,String role) {
+    public User registerUser(String email, String password ,Role role) {
         if (userRepository.findByEmail(email).isPresent()) {
             throw new RuntimeException("Email already registered!");
         }
