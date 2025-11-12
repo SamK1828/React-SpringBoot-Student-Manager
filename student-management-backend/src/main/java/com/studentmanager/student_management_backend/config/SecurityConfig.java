@@ -1,7 +1,5 @@
 package com.studentmanager.student_management_backend.config;
 
-
-
 // import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.context.annotation.*;
 // import org.springframework.security.authentication.*;
@@ -63,7 +61,6 @@ package com.studentmanager.student_management_backend.config;
 //     }
 // }
 
-
 // package com.example.securitydemo.config;
 
 // import com.example.securitydemo.filter.JwtAuthFilter;
@@ -91,17 +88,38 @@ public class SecurityConfig {
         this.jwtAuthFilter = jwtAuthFilter;
     }
 
+    // @Bean
+    // public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    // http.csrf(AbstractHttpConfigurer::disable)
+    // .sessionManagement(s ->
+    // s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+    // .authorizeHttpRequests(auth -> auth
+    // .requestMatchers("/api/auth/**").permitAll()
+    // .requestMatchers("/api/admin/**").hasRole("ADMIN")
+    // .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
+    // .anyRequest().authenticated()
+    // )
+    // .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+    // return http.build();
+    // }
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-            .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
-                .anyRequest().authenticated()
-            )
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        // Public endpoints
+                        .requestMatchers("/api/auth/**").permitAll()
+                        // Role-based access
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
+                        // Any other endpoints must be authenticated
+                        .anyRequest().authenticated())
+                // No sessions — stateless JWT
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                // Add our JWT filter before username/password filter
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 
