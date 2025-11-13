@@ -65,19 +65,20 @@ package com.studentmanager.student_management_backend.config;
 
 // import com.example.securitydemo.filter.JwtAuthFilter;
 // import com.example.securitydemo.service.CustomUserDetailsService;
+
+// package com.studentmanager.student_management_backend.config;
+
+import com.studentmanager.student_management_backend.security.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import com.studentmanager.student_management_backend.security.JwtAuthFilter;
 
 @Configuration
 public class SecurityConfig {
@@ -88,36 +89,17 @@ public class SecurityConfig {
         this.jwtAuthFilter = jwtAuthFilter;
     }
 
-    // @Bean
-    // public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    // http.csrf(AbstractHttpConfigurer::disable)
-    // .sessionManagement(s ->
-    // s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-    // .authorizeHttpRequests(auth -> auth
-    // .requestMatchers("/api/auth/**").permitAll()
-    // .requestMatchers("/api/admin/**").hasRole("ADMIN")
-    // .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
-    // .anyRequest().authenticated()
-    // )
-    // .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-    // return http.build();
-    // }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Public endpoints
                         .requestMatchers("/api/auth/**").permitAll()
-                        // Role-based access
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
-                        // Any other endpoints must be authenticated
-                        .anyRequest().authenticated())
-                // No sessions — stateless JWT
+                        .anyRequest().authenticated()
+                )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                // Add our JWT filter before username/password filter
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -129,7 +111,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authManager(AuthenticationConfiguration config) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 }
