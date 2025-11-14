@@ -76,7 +76,6 @@ package com.studentmanager.student_management_backend.service;
 //     }
 // }
 
-
 // package com.example.securitydemo.service;
 
 import io.jsonwebtoken.*;
@@ -113,6 +112,10 @@ public class JwtService {
 
     public boolean isTokenValid(String token) {
         return extractAllClaims(token).getExpiration().after(new Date());
+    }
+
+    public String extractRole(String token) {
+        return extractAllClaims(token).get("role", String.class);
     }
 
     private Claims extractAllClaims(String token) {
