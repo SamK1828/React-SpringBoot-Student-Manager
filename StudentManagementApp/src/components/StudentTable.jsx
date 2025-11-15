@@ -24,13 +24,12 @@ const StudentTable = ({ students }) => {
                 <td className="p-3">{s.id}</td>
                 <td className="p-3">{s.name}</td>
                 <td
-                  className={`p-3 font-medium ${
-                    s.marks >= 80
+                  className={`p-3 font-medium ${s.marks >= 80
                       ? "text-green-600"
                       : s.marks < 40
-                      ? "text-red-600"
-                      : "text-gray-700"
-                  }`}
+                        ? "text-red-600"
+                        : "text-gray-700"
+                    }`}
                 >
                   {s.marks}
                 </td>
